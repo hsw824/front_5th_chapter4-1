@@ -1,5 +1,8 @@
 ![alt text](image.png)
 
+S3 버킷 웹사이트 엔드포인트: [웹사이트 링크](http://hsw-bucket.s3-website-ap-southeast-2.amazonaws.com/)
+CloudFront 배포 도메인 이름: [배포 도메인 링크](https://d6pp32oucgr56.cloudfront.net)
+
 ## GitHub Actions과 CI/CD
 
 - CI의 뜻은 지속적 통합이고, CD는 지속적 배포라는 뜻 입니다.
@@ -61,7 +64,7 @@ CDN의 구성 요소
 2. Edge 서버 : 사용자와 가까운 위치에 있는 CDN서버. 초기 콘텐츠가 없을 경우 Origin 서버에서 컨텐츠를 가져와 사용자에게 전달하고, 캐시합니다.
 3. 캐시 : Edge 서버가 가지고 있는 정적 파일(이미지, js, css 등)
 
-## 캐시 무효화(https://aws.amazon.com/ko/blogs/networking-and-content-delivery/host-single-page-applications-spa-with-tiered-ttls-on-cloudfront-and-s3/ 를 정리했습니다.)
+## 캐시 무효화( [CloudFront 및 S3에서 계층형 TTL을 사용하여 단일 페이지 애플리케이션(SPA) 호스팅](https://aws.amazon.com/ko/blogs/networking-and-content-delivery/host-single-page-applications-spa-with-tiered-ttls-on-cloudfront-and-s3/)을 보고 정리했습니다.)
 
 - 정적 웹사이트(SPA)를 배포할 때는, 성능을 높이기 위해 CDN 캐싱을 사용합니다. 하지만 캐싱이 잘못 설정되면, 사용자가 오래된 화면을 계속 보게 되는 문제가 생깁니다.
 - 이를 해결하기 위해 CloudFront + S3 조합에서는 “캐시 무효화 없는 배포 전략”을 사용할 수 있습니다.
