@@ -1,8 +1,12 @@
+# 기본과제
 ![alt text](image.png)
 
-**S3 버킷 웹사이트 엔드포인트: [버킷 웹사이트 엔드포인트](http://hsw-bucket.s3-website-ap-southeast-2.amazonaws.com/)**
 
-**CloudFront 배포 도메인 이름: [배포 도메인 이름](https://d6pp32oucgr56.cloudfront.net)**
+## 주요 링크
+
+**S3 버킷 웹사이트 엔드포인트 : [버킷 웹사이트 엔드포인트](http://hsw-bucket.s3-website-ap-southeast-2.amazonaws.com/)**
+
+**CloudFront 배포 도메인 이름 : [배포 도메인 이름](https://d6pp32oucgr56.cloudfront.net)**
 
 ## GitHub Actions과 CI/CD
 
@@ -56,12 +60,12 @@
 - CDN을 이용하면 웹 사이트 로딩이 빨라지고 서버의 부하가 줄어듭니다.
 - AWS는 CloudFront를 통해 CDN 기능을 제공합니다.
 
-CDN의 기본 개념
+### CDN의 기본 개념
 
 - 하나의 서버로 모든 요청을 처리한다면, 물리적으로 거리가 먼 경우 응답 시간이 길어지고 로딩 속도가 저하됩니다.
 - 이를 개선하기 위해 콘텐츠를 제공하는 서버를 여러 지역에 두고, 사용자에게 가까운 서버에서 웹 사이트를 제공하는 구조를 CDN이라고 합니다
 
-CDN의 구성 요소
+### CDN의 구성 요소
 
 1. Origin 서버 : 원본 콘텐츠를 보관하는 서버
 2. Edge 서버 : 사용자와 가까운 위치에 있는 CDN서버. 초기 콘텐츠가 없을 경우 Origin 서버에서 컨텐츠를 가져와 사용자에게 전달하고, 캐시합니다.
@@ -143,3 +147,7 @@ JS파일 : 7ms -> 69ms
 - S3와 CloudFront를 각각 캐시된 상태에서 재접속했을 때의 리소스 응답 시간을 비교한 결과, 폰트·스타일 시트 등 작은 정적 자원은 양측 모두 10~15ms 수준으로 큰 차이가 없었습니다.
 - JS 파일은 S3가 평균 7ms로 빠른 반면, CloudFront는 70ms 내외로 상대적으로 더 느렸습니다. S3의 경우 디스크 캐시로 네트워크 요청을 하지 않았기 때문에 7ms로 빠른 속도를 보였습니다. 하지만 CloudFront가 304 Not Modified 응답을 반환함으로써 본문 전송은 생략되었지만, 조건부 요청(If-None-Match/If-Modified-Since) 검증 과정으로 인해 응답 시간이 길어졌다고 추측할 수 있겠습니다.
 -  HTML 문서의 응답 시간으로, S3는 353ms였던 데 반해 CloudFront는 13ms로 95% 이상 단축되었습니다. CDN도입으로 인해 네트워크 지연을 크게 단축할 수 있었습니다.
+
+---
+# QnA
+1. S3 vs CloudFront의 속도를 비교하는 과정에서 **"S3의 경우 디스크 캐시로 네트워크 요청을 하지 않았기 때문에 7ms로 빠른 속도를 보였습니다. 하지만 CloudFront가 304 Not Modified 응답을 반환함으로써 본문 전송은 생략되었지만, 조건부 요청(If-None-Match/If-Modified-Since) 검증 과정으로 인해 응답 시간이 길어졌다고 추측할 수 있겠습니다."** 라는 추측이 타당한지 궁금합니다.
