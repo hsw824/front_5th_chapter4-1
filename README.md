@@ -95,3 +95,50 @@ main.[hash].js, style.[hash].css
 
 - stale-while-revalidate는 오래된 캐시를 먼저 보여주고,
   백그라운드에서 최신 파일을 받아오는 HTTP 캐시 전략입니다. -사용자는 기다리지 않고 즉시 화면을 보며, 다음 방문 때는 백그라운드에서 받아둔 최신 버전이 자동으로 반영됩니다.
+
+
+---
+
+# 심화과제
+
+## S3( 비교항목 : 최초접속 vs 캐싱 후 재접속 )
+### S3 최초 접속
+![S3 최초 접속](https://github.com/user-attachments/assets/7acf63f0-4c6d-4ca0-a1d3-5940745bff2f)
+### S3 캐싱 후 재접속
+![S3 캐싱 후 재접속](https://github.com/user-attachments/assets/2ea78290-7483-42de-af05-0d8eca371fa6)
+### 그래프 통합 비교
+![그래프](https://github.com/user-attachments/assets/5d798b34-fb39-4120-b119-6dd45be4c984)
+
+### 결과 요약
+Font파일 : 317ms -> 8ms
+
+CSS파일 : 380ms -> 12ms
+
+JS파일 : 502ms -> 7ms
+
+메인 HTML 문서 : 392ms -> 353ms
+- S3도 브라우저 캐싱을 활용하긴 합니다. 실제로 폰트, 스타일, 스크립트 파일의 로딩 속도는 최초 접속 대비 90% 이상 감소하여 10ms 내외로 줄어들었습니다.
+- 하지만 메인 HTML 문서는 여전히 전체 응답 시간이 350ms 수준으로, 캐싱 여부에 관계없이 큰 차이를 보이지 않았습니다.
+
+
+## S3 vs CloudFront( 비교항목 :  캐싱 후 재접속 )
+
+### S3 캐싱 후 재접속
+![S3 캐싱 후 재접속](https://github.com/user-attachments/assets/2ea78290-7483-42de-af05-0d8eca371fa6)
+### CDN 도입 캐싱 후 재접속
+![image](https://github.com/user-attachments/assets/72ea43c1-11d8-4c38-806e-487d2902de8d)
+### 그래프 통합 비교
+![image](https://github.com/user-attachments/assets/3615a17b-a86f-4320-9c76-253a7ed7f2f0)
+
+### 결과 요약
+S3 vs CloudFront( 비교항목 :  캐싱 후 재접속 )
+font : 8ms -> 15ms
+
+Css : 12ms -> 15ms
+
+JS파일 : 7ms -> 69ms
+
+메인 HTML 문서 : 353ms -> 13ms
+ 
+- S3와 CloudFront를 각각 캐시된 상태에서 재접속했을 때의 리소스 응답 시간을 비교한 결과, 폰트·스타일 시트 등 작은 정적 자원은 양측 모두 10~15ms 수준으로 큰 차이가 없었습니다.
+- JS 파일은 S3가 평균 7ms로 빠른 반면, CloudFront는 70ms 내외로 상대적으로 더 느렸습니다. S3의 경우 디스크 캐시로 네트워크 요청을 하지 않았기 때문에 7ms로 빠른 속도를 보였습니다. 하지만 CloudFront가 304 Not Modified 응답을 반환함으로써 본문 전송은 생략되었지만, 조건부 요청(If-None-Match/If-Modified-Since) 검증 과정으로 인해 응답 시간이 길어졌다고 추측할 수 있겠습니다.
