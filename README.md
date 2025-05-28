@@ -1,7 +1,8 @@
 ![alt text](image.png)
 
-S3 버킷 웹사이트 엔드포인트: [웹사이트 링크](http://hsw-bucket.s3-website-ap-southeast-2.amazonaws.com/)
-CloudFront 배포 도메인 이름: [배포 도메인 링크](https://d6pp32oucgr56.cloudfront.net)
+**S3 버킷 웹사이트 엔드포인트: [버킷 웹사이트 엔드포인트](http://hsw-bucket.s3-website-ap-southeast-2.amazonaws.com/)**
+
+**CloudFront 배포 도메인 이름: [배포 도메인 이름](https://d6pp32oucgr56.cloudfront.net)**
 
 ## GitHub Actions과 CI/CD
 
