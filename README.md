@@ -86,7 +86,7 @@ main.[hash].js, style.[hash].css
   - 사용자의 브라우저가 이미 index.html을 캐시하고 있는데, TTL이 만료되었다면, 브라우저는 캐시된 파일의 ETag를 If-None-Match 헤더에 담아 CloudFront에 조건부 요청을 보냅니다. CloudFront/S3는 현재 파일의 ETag와 비교하여 응답합니다.
 
 1. ETag가 동일함 : 304 Not Modified 응답으로 브라우저가 갖고 있는 파일을 그대로 사용
-   2.ETag가 다름 : 200 OK 응답과 함께 파일이 바뀌었으므로 최신 버전 제공
+2. ETag가 다름 : 200 OK 응답과 함께 파일이 바뀌었으므로 최신 버전 제공
 
 ### stale-while-revalidate로 사용자 경험 향상
 
